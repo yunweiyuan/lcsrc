@@ -42,6 +42,19 @@
  */
 class Solution {
     public int getMoneyAmount(int n) {
-        
+        int[][] table = new int[n+1][n+1];
+	return dp(table, 1, n);	 
+    }
+
+    private int dp(int[][] table, int s, int e) {
+	if(s >= e) return 0;
+	if(table[s][e] != 0) return table[s][e];
+	int pay = Integer.MAX_VALUE;
+	for(int k=s; k<=e; k++){
+	    int temp = k + Math.max(dp(table, s, k-1), dp(table, k+1, e));
+	    pay = Math.min(pay, temp);
+	}
+	table[s][e] = pay;
+	return pay;
     }
 }
