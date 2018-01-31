@@ -36,13 +36,10 @@ class Solution {
 			int min = i+1;
 			for(int j=0; j<root-1; j++){
 				int factor = (j+1)*(j+1);
-				//System.out.println(j);
-				//System.out.printf("dp:%d, factor1:%d, factor2:%d; ", dp.length, factor-1, i-factor);
 				min = Math.min(min, dp[factor-1] + dp[i-factor]);
 			}
 			dp[i] = min;
 		}
-		//for(int num: dp) System.out.printf("%d ",num);
 		return dp[n-1];
     }
 }
