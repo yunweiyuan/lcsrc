@@ -40,7 +40,7 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-		Stack<TreeNode> stack = new Stack<TreeNode>();
+/*		Stack<TreeNode> stack = new Stack<TreeNode>();
 		LinkedList<Integer> result = new LinkedList<Integer>();
 
 		while(root != null || !stack.empty()){
@@ -52,6 +52,18 @@ class Solution {
 				root = stack.pop();
 			}
 		}
-		return result;
-    }
+		return result; */
+		
+		List<Integer> result = new LinkedList<Integer>();
+		helper(result, root);
+    	return result;
+	}
+
+	void helper(List<Integer> result, TreeNode node){
+		if(node != null){
+			helper(result, node.left);
+			helper(result, node.right);
+			result.add(node.val);
+		}
+	}
 }
