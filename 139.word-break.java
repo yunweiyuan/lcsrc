@@ -47,7 +47,7 @@ class Solution {
 		int last = 0;
 		for(int i=1; i<=s.length(); i++){
 			if(i>last+longestWord) break;
-			for(int j=0; j<i; j++){
+			for(int j=Math.max(0, i-longestWord); j<i; j++){
 				String temp = s.substring(j, i);
 				if(dp[j] && set.contains(temp)){
 					dp[i] = true;
