@@ -78,6 +78,7 @@ class Solution {
 		for(int num: nums){
 			for(int i=sum; i>0; i--){
 				if(i >= num) dp[i] = dp[i] || dp[i-num];
+				else break;
 			}
 		}
 
