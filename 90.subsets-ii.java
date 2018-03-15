@@ -38,24 +38,22 @@ class Solution {
 			return result;
 		}
 		Arrays.sort(nums);
-		dfsHelper(nums, 0, new ArrayList<Integer>(), new HashSet<List<Integer>>(), result);
+		dfsHelper(nums, 0, new ArrayList<Integer>(), result);
 		return result;
     }
 
 	private void dfsHelper(int[] nums,
 						   int startIdx,
 						   List<Integer> subset,
-						   HashSet<List<Integer>> pool,
 						   List<List<Integer>> result) {
-		if(!pool.contains(subset)) {
-			ArrayList<Integer> uniSubset = new ArrayList<Integer>(subset);
-			result.add(uniSubset);
-			pool.add(uniSubset);
-		}
+		result.add(new ArrayList<>(subset));
 
 		for(int i = startIdx; i < nums.length; i++) {
+			if(i > startIdx && nums[i] == nums[i-1]) {
+				continue;
+			}
 			subset.add(nums[i]);
-			dfsHelper(nums, i + 1, subset, pool, result);
+			dfsHelper(nums, i + 1, subset, result);
 			subset.remove(subset.size() - 1);
 		}
 	}
