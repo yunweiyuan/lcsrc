@@ -35,7 +35,39 @@
  * 
  */
 class Solution {
-    public String decodeString(String s) {
+
+	public String decodeString(String s) {
+		String base = "";
+		Stack<Integer> coefs = new Stack<>();
+		Stack<String> prefix = new Stack<>();
+
+		for(int i = 0; i < s.length(); i++) {
+			if(Character.isDigit(s.charAt(i))) {
+				int coef = s.charAt(i) - '0';
+				while(Character.isDigit(s.charAt(i + 1))){
+					coef = coef * 10 + s.charAt(++i) - '0';
+				}
+				coefs.push(coef);
+			} else if(s.charAt(i) == '[') {
+				prefix.push(base);
+				base = "";
+			} else if(s.charAt(i) == ']') {
+				String prev = prefix.pop();
+				int coef = coefs.pop();
+				for(int j = 0; j < coef; j++) {
+					prev += base;
+				}
+				base = prev;
+			} else {
+				base += s.charAt(i);
+			}
+		}
+
+		return base;
+	}
+
+// Recursive
+/*	public String decodeString(String s) {
 		String digit = "";
 		String result = "";
 		for(int i = 0; i < s.length(); i++) {
@@ -69,4 +101,5 @@ class Solution {
 		}
 		return result;
     }
+*/
 }
